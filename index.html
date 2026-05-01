@@ -1,1 +1,648 @@
-<h1>Hi this is manikanta welcome to my first automation for docker and jenkins combination , thanks mustafa anna</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>IT Nexus | Modern Learning Hub for IT Pros</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8fafc;
+      color: #0f172a;
+      scroll-behavior: smooth;
+    }
+
+    /* custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #e2e8f0;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #3b82f6;
+      border-radius: 10px;
+    }
+
+    /* glassmorphism navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+      z-index: 100;
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      border-bottom: 1px solid rgba(59,130,246,0.2);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+    }
+    .logo i {
+      background: none;
+      color: #3b82f6;
+      margin-right: 6px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #1e293b;
+      transition: 0.2s;
+      font-size: 1rem;
+    }
+    .nav-links a:hover {
+      color: #2563eb;
+    }
+    .btn-outline-light {
+      background: transparent;
+      border: 1.5px solid #3b82f6;
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      color: #2563eb;
+      transition: 0.2s;
+    }
+    .btn-outline-light:hover {
+      background: #3b82f6;
+      color: white;
+    }
+
+    /* hero section */
+    .hero {
+      padding: 4rem 5% 3rem;
+      text-align: center;
+      background: linear-gradient(145deg, #ffffff 0%, #f1f5f9 100%);
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(to right, #0f172a, #2563eb);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: #334155;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+    .search-bar {
+      max-width: 550px;
+      margin: 0 auto;
+      display: flex;
+      background: white;
+      border-radius: 60px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+    }
+    .search-bar input {
+      flex: 1;
+      padding: 1rem 1.5rem;
+      border: none;
+      font-size: 1rem;
+      outline: none;
+    }
+    .search-bar button {
+      background: #2563eb;
+      border: none;
+      padding: 0 1.8rem;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 1rem;
+    }
+    .search-bar button:hover {
+      background: #1d4ed8;
+    }
+
+    /* categories / trending chips */
+    .trending {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.8rem;
+      margin-top: 2rem;
+    }
+    .chip {
+      background: white;
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 0.85rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      border: 1px solid #cbd5e1;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .chip i {
+      margin-right: 8px;
+      font-size: 0.8rem;
+    }
+    .chip:hover, .chip.active {
+      background: #2563eb;
+      color: white;
+      border-color: #2563eb;
+    }
+
+    /* course grid */
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 2.5rem 5% 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title i {
+      background: #eef2ff;
+      padding: 10px;
+      border-radius: 30px;
+      color: #2563eb;
+    }
+    .courses-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 0 5% 3rem;
+    }
+    .course-card {
+      background: white;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+      transition: transform 0.25s ease, box-shadow 0.3s;
+      cursor: pointer;
+      border: 1px solid rgba(0,0,0,0.03);
+    }
+    .course-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 25px 35px -12px rgba(0,0,0,0.15);
+    }
+    .card-img {
+      height: 160px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      padding: 10px;
+    }
+    .badge {
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(4px);
+      color: white;
+      font-size: 0.7rem;
+      padding: 4px 12px;
+      border-radius: 30px;
+      font-weight: 600;
+    }
+    .card-content {
+      padding: 1.5rem;
+    }
+    .course-title {
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .course-instructor {
+      font-size: 0.85rem;
+      color: #475569;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .rating {
+      color: #fbbf24;
+      letter-spacing: 2px;
+      font-size: 0.8rem;
+      margin-bottom: 0.8rem;
+    }
+    .price {
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: #0f172a;
+    }
+    .old-price {
+      text-decoration: line-through;
+      color: #94a3b8;
+      font-size: 0.9rem;
+      margin-left: 8px;
+      font-weight: 400;
+    }
+
+    /* interactive lesson preview modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: white;
+      max-width: 500px;
+      width: 90%;
+      border-radius: 2rem;
+      padding: 2rem;
+      text-align: center;
+      animation: fadeUp 0.3s;
+    }
+    @keyframes fadeUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .modal-content h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    .modal-content p {
+      color: #334155;
+      margin: 1rem 0;
+    }
+    .close-modal {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.8rem;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+
+    /* newsletter */
+    .newsletter {
+      background: linear-gradient(115deg, #0f172a 0%, #1e293b 100%);
+      margin: 3rem 5% 2rem;
+      border-radius: 2.5rem;
+      padding: 3rem 2rem;
+      text-align: center;
+      color: white;
+    }
+    .newsletter h2 {
+      font-size: 1.8rem;
+    }
+    .newsletter-form {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .newsletter-form input {
+      padding: 0.9rem 1.5rem;
+      border-radius: 60px;
+      border: none;
+      width: 260px;
+      font-size: 1rem;
+    }
+    .newsletter-form button {
+      background: #f59e0b;
+      border: none;
+      padding: 0 1.8rem;
+      border-radius: 60px;
+      font-weight: bold;
+      color: #0f172a;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #475569;
+      border-top: 1px solid #e2e8f0;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 700px) {
+      .navbar {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .section-title {
+        font-size: 1.6rem;
+      }
+    }
+    .toast-msg {
+      position: fixed;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0f172a;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-weight: 500;
+      z-index: 1100;
+      opacity: 0;
+      transition: 0.2s;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="navbar">
+  <div class="logo">
+    <i class="fas fa-network-wired"></i> IT Nexus
+  </div>
+  <div class="nav-links">
+    <a href="#">Explore</a>
+    <a href="#">Paths</a>
+    <a href="#">Community</a>
+    <a href="#" class="btn-outline-light"><i class="fas fa-user-graduate"></i> Sign In</a>
+  </div>
+</div>
+
+<section class="hero">
+  <h1>Level up your IT career 🚀</h1>
+  <p>Master cloud, DevOps, cybersecurity, AI & more — interactive courses taught by industry experts.</p>
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search for 'Python', 'AWS', 'Linux'..." autocomplete="off">
+    <button id="searchBtn"><i class="fas fa-search"></i> Search</button>
+  </div>
+  <div class="trending" id="trendingChips">
+    <div class="chip" data-category="all"><i class="fas fa-fire"></i> All</div>
+    <div class="chip" data-category="devops"><i class="fab fa-docker"></i> DevOps</div>
+    <div class="chip" data-category="cloud"><i class="fas fa-cloud"></i> Cloud</div>
+    <div class="chip" data-category="ai"><i class="fas fa-brain"></i> AI/ML</div>
+    <div class="chip" data-category="security"><i class="fas fa-shield-alt"></i> Cybersecurity</div>
+  </div>
+</section>
+
+<div class="section-title">
+  <i class="fas fa-graduation-cap"></i> 
+  <span>🔥 Most popular for IT pros</span>
+</div>
+<div class="courses-container" id="coursesGrid">
+  <!-- dynamic cards via JS -->
+</div>
+
+<!-- Newsletter -->
+<div class="newsletter">
+  <h2><i class="fas fa-envelope-open-text"></i> Get fresh tech insights</h2>
+  <p>Weekly handpicked tutorials & career tips — no spam, only bytes.</p>
+  <div class="newsletter-form">
+    <input type="email" id="emailInput" placeholder="your@email.com">
+    <button id="subscribeBtn">Subscribe →</button>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 IT Nexus — Empowering IT Workforce. All interactive demos for learning.</p>
+  <p style="margin-top: 0.5rem;"><i class="fas fa-code"></i> built with 💙 for developers & sysadmins</p>
+</footer>
+
+<!-- Modal for quick preview -->
+<div id="previewModal" class="modal">
+  <div class="modal-content">
+    <i class="fas fa-play-circle" style="font-size: 3rem; color:#3b82f6;"></i>
+    <h3 id="modalTitle">Course Preview</h3>
+    <p id="modalDesc">Interactive lesson sample: video, quiz, and hands-on lab included. Enroll to unlock full content.</p>
+    <button class="close-modal" id="closeModalBtn"><i class="fas fa-rocket"></i> Start Learning</button>
+  </div>
+</div>
+<div id="toastMsg" class="toast-msg"></div>
+
+<script>
+  // ---------- COURSE DATABASE (rich & diverse IT topics) ----------
+  const coursesData = [
+    { id: 1, title: "Complete DevOps Bootcamp", instructor: "Michael Chen", category: "devops", rating: 4.8, price: 49, oldPrice: 129, image: "https://placehold.co/600x400/1e293b/ffffff?text=DevOps", description: "CI/CD, Docker, K8s, Jenkins, Terraform — full lifecycle." },
+    { id: 2, title: "AWS Solutions Architect", instructor: "Sarah Johnson", category: "cloud", rating: 4.9, price: 59, oldPrice: 149, image: "https://placehold.co/600x400/0f172a/ffffff?text=AWS", description: "Master AWS: EC2, S3, Lambda, VPC, and architecting on cloud." },
+    { id: 3, title: "Python for Network Automation", instructor: "David Kim", category: "devops", rating: 4.7, price: 39, oldPrice: 99, image: "https://placehold.co/600x400/2d3748/ffffff?text=Python", description: "Automate networks with Netmiko, NAPALM & REST APIs." },
+    { id: 4, title: "AI & Machine Learning Crash Course", instructor: "Dr. Li Wei", category: "ai", rating: 4.9, price: 69, oldPrice: 199, image: "https://placehold.co/600x400/312e81/ffffff?text=AI+ML", description: "TensorFlow, PyTorch, LLMs, computer vision — modern AI." },
+    { id: 5, title: "Cybersecurity Zero to Hero", instructor: "James Bond (CISO)", category: "security", rating: 4.8, price: 55, oldPrice: 129, image: "https://placehold.co/600x400/7f1d1d/ffffff?text=CyberSec", description: "Threat analysis, ethical hacking, SOC, SIEM, incident response." },
+    { id: 6, title: "Kubernetes in Production", instructor: "Anna Taylor", category: "devops", rating: 4.9, price: 45, oldPrice: 119, image: "https://placehold.co/600x400/14532d/ffffff?text=K8s", description: "Helm, security, monitoring, GitOps, and cluster management." },
+    { id: 7, title: "Microsoft Azure Fundamentals", instructor: "Omar Rodriguez", category: "cloud", rating: 4.6, price: 35, oldPrice: 89, image: "https://placehold.co/600x400/0c4a6e/ffffff?text=Azure", description: "AZ-900 prep, virtual networks, storage, serverless." },
+    { id: 8, title: "Generative AI for Developers", instructor: "Emma Watson", category: "ai", rating: 4.9, price: 79, oldPrice: 159, image: "https://placehold.co/600x400/4c1d95/ffffff?text=GenAI", description: "GPT, LangChain, prompt engineering & AI agents." }
+  ];
+
+  let activeFilter = "all";
+  let searchQuery = "";
+
+  // Helper: render stars from rating
+  function renderStars(rating) {
+    const full = Math.floor(rating);
+    const half = rating % 1 >= 0.5 ? 1 : 0;
+    let stars = "";
+    for (let i = 0; i < full; i++) stars += '<i class="fas fa-star"></i>';
+    if (half) stars += '<i class="fas fa-star-half-alt"></i>';
+    while (stars.length / 3 < 5 && (full+half) < 5) stars += '<i class="far fa-star"></i>';
+    return stars;
+  }
+
+  // filter logic based on category + search (title/instructor)
+  function getFilteredCourses() {
+    let filtered = coursesData.filter(course => {
+      if (activeFilter !== "all" && course.category !== activeFilter) return false;
+      if (searchQuery.trim() !== "") {
+        const q = searchQuery.toLowerCase();
+        return course.title.toLowerCase().includes(q) || course.instructor.toLowerCase().includes(q);
+      }
+      return true;
+    });
+    return filtered;
+  }
+
+  function renderCourses() {
+    const container = document.getElementById("coursesGrid");
+    const filtered = getFilteredCourses();
+    if (filtered.length === 0) {
+      container.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem;"><i class="fas fa-database fa-2x"></i><p style="margin-top:1rem;">No courses match. Try another keyword 🧑‍💻</p></div>`;
+      return;
+    }
+    container.innerHTML = filtered.map(course => `
+      <div class="course-card" data-id="${course.id}">
+        <div class="card-img" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.5)), url('${course.image}'); background-size: cover;">
+          <span class="badge"><i class="fas fa-laptop-code"></i> ${course.category.toUpperCase()}</span>
+        </div>
+        <div class="card-content">
+          <div class="course-title">${course.title}</div>
+          <div class="course-instructor"><i class="fas fa-chalkboard-user"></i> ${course.instructor}</div>
+          <div class="rating">${renderStars(course.rating)} <span style="color:#475569; font-size:0.75rem;">(${course.rating})</span></div>
+          <div class="price">$${course.price} <span class="old-price">$${course.oldPrice}</span></div>
+        </div>
+      </div>
+    `).join('');
+
+    // attach event listeners to each card for interactive modal preview
+    document.querySelectorAll('.course-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        // don't bubble if inner elements?
+        const cardId = parseInt(card.getAttribute('data-id'));
+        const course = coursesData.find(c => c.id === cardId);
+        if (course) {
+          showPreviewModal(course);
+        }
+      });
+    });
+  }
+
+  // show interactive modal (preview lesson)
+  function showPreviewModal(course) {
+    const modal = document.getElementById("previewModal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalDesc = document.getElementById("modalDesc");
+    modalTitle.innerText = course.title;
+    modalDesc.innerText = `📘 "${course.description}" — This interactive preview includes a short video intro and a quiz to test your knowledge. Enroll to get full labs + certificate.`;
+    modal.style.display = "flex";
+    // close modal on button click and background click
+    const closeBtn = document.getElementById("closeModalBtn");
+    const closeModalHandler = () => {
+      modal.style.display = "none";
+      showToast(`✨ You unlocked a free preview of ${course.title}. Full course awaits!`);
+      closeBtn.removeEventListener('click', closeModalHandler);
+      window.removeEventListener('click', outsideClickHandler);
+    };
+    const outsideClickHandler = (e) => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+        window.removeEventListener('click', outsideClickHandler);
+        closeBtn.removeEventListener('click', closeModalHandler);
+      }
+    };
+    closeBtn.addEventListener('click', closeModalHandler);
+    window.addEventListener('click', outsideClickHandler);
+  }
+
+  function showToast(msg) {
+    const toast = document.getElementById("toastMsg");
+    toast.innerText = msg;
+    toast.style.opacity = "1";
+    setTimeout(() => {
+      toast.style.opacity = "0";
+    }, 2300);
+  }
+
+  // filter logic & re-render
+  function setActiveFilter(category) {
+    activeFilter = category;
+    updateChipActiveUI();
+    renderCourses();
+  }
+
+  function setSearchQuery(query) {
+    searchQuery = query;
+    renderCourses();
+  }
+
+  function updateChipActiveUI() {
+    document.querySelectorAll('.chip').forEach(chip => {
+      const cat = chip.getAttribute('data-category');
+      if ((activeFilter === cat) || (activeFilter === "all" && cat === "all")) {
+        chip.classList.add('active');
+      } else {
+        chip.classList.remove('active');
+      }
+    });
+  }
+
+  // Search interactivity
+  document.getElementById("searchBtn").addEventListener("click", () => {
+    const inputVal = document.getElementById("searchInput").value;
+    setSearchQuery(inputVal);
+  });
+  document.getElementById("searchInput").addEventListener("keyup", (e) => {
+    if (e.key === "Enter") {
+      setSearchQuery(e.target.value);
+    }
+  });
+
+  // chip filter binding
+  document.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const category = chip.getAttribute('data-category');
+      setActiveFilter(category);
+      // also clear search if user wants fresh? but keep consistent: just filter
+      // keep search query but may combine, it's a natural AND filter, but to improve UX we don't clear search
+      // re-render anyway
+    });
+  });
+
+  // Newsletter subscription interactive
+  document.getElementById("subscribeBtn").addEventListener("click", () => {
+    const email = document.getElementById("emailInput").value.trim();
+    if (!email || !email.includes('@') || !email.includes('.')) {
+      showToast("📧 Please enter a valid email address.");
+      return;
+    }
+    showToast(`🎉 Thanks ${email.split('@')[0]}! You're subscribed to IT Nexus weekly!`);
+    document.getElementById("emailInput").value = "";
+  });
+
+  // initial render
+  renderCourses();
+  updateChipActiveUI();
+
+  // Extra mini interactive spin: modal can also be closed by escape key
+  document.addEventListener('keydown', (e) => {
+    const modal = document.getElementById("previewModal");
+    if (e.key === "Escape" && modal.style.display === "flex") {
+      modal.style.display = "none";
+    }
+  });
+  
+  // Additional interactive feature: adding a "trending" notice
+  const style = document.createElement('style');
+  style.textContent = `
+    .chip.active {
+      background: #2563eb;
+      color: white;
+      border-color: #2563eb;
+      box-shadow: 0 6px 12px -8px #2563eb60;
+    }
+    .course-card {
+      transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+    .newsletter button:hover {
+      background: #fbbf24;
+      transform: scale(0.98);
+    }
+    .search-bar button:hover, .btn-outline-light:hover {
+      transform: scale(0.97);
+    }
+  `;
+  document.head.appendChild(style);
+</script>
+</body>
+</html>
